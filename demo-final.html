@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scholr AI - Demo</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0a0a0b;--bg2:#0f0f10;--bg3:#161618;--text:#fafafa;--text2:#a0a0a0;--muted:#5a5a5a;--accent:#550000;--accent2:#7a1a1a;--accent3:#aa3333;--border:rgba(255,255,255,0.08);--success:#2d5a3d;--success2:#4a8c5e;--blue:#2a5a8c;--purple:#6b4a9c;--serif:'Cormorant Garamond',serif;--sans:'Inter',sans-serif}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:var(--sans);background:var(--bg);color:var(--text);line-height:1.6;min-height:100vh}
+nav{position:fixed;top:0;left:0;right:0;padding:1rem 3rem;display:flex;justify-content:space-between;align-items:center;z-index:100;background:var(--bg);border-bottom:1px solid var(--border)}
+.nav-left{display:flex;align-items:center;gap:1.5rem}
+.logo{font-family:var(--serif);font-size:1.5rem;color:var(--text);text-decoration:none}
+.logo span{color:var(--accent2)}
+.badge{padding:.4rem 1rem;background:rgba(85,0,0,0.25);border:1px solid rgba(85,0,0,0.4);border-radius:100px;font-size:.7rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#cc9999}
+.restart{padding:.5rem 1rem;background:0;border:1px solid var(--border);border-radius:6px;font-size:.8rem;color:var(--muted);cursor:pointer}
+.restart:hover{border-color:var(--accent2);color:var(--text)}
+.container{max-width:1400px;margin:0 auto;padding:6rem 2rem 3rem}
+.header{text-align:center;margin-bottom:1.5rem}
+.header h1{font-family:var(--serif);font-size:clamp(1.75rem,4vw,2.5rem);font-weight:400;margin-bottom:.5rem}
+.header h1 em{font-style:italic;color:#cc9999}
+.header p{color:var(--text2);font-size:.95rem}
+.phases{display:flex;justify-content:center;gap:.5rem;margin-bottom:2rem;flex-wrap:wrap}
+.phase{display:flex;align-items:center;gap:.4rem;font-size:.75rem;color:var(--muted);padding:.4rem .75rem;border-radius:100px}
+.phase.active{color:#cc9999;background:rgba(85,0,0,0.25)}
+.phase.done{color:var(--success2)}
+.phase-num{width:18px;height:18px;border-radius:50%;background:var(--bg3);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:600}
+.phase.active .phase-num{background:var(--accent2);border-color:var(--accent2);color:#fff}
+.phase.done .phase-num{background:var(--success);border-color:var(--success2);color:#fff}
+.arrow{color:var(--muted);font-size:.7rem}
+.split{display:grid;grid-template-columns:1fr 100px 1fr;gap:1rem}
+.panel{background:var(--bg2);border:1px solid var(--border);border-radius:16px;overflow:hidden}
+.panel-head{padding:1rem 1.25rem;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:.75rem}
+.panel-icon{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center}
+.student .panel-icon{background:rgba(85,0,0,0.25)}
+.lab .panel-icon{background:rgba(42,90,140,0.25)}
+.panel-icon svg{width:16px;height:16px}
+.student .panel-icon svg{color:#cc9999}
+.lab .panel-icon svg{color:#7ab8cc}
+.panel-title{font-family:var(--serif);font-size:1.05rem}
+.panel-sub{font-size:.7rem;color:var(--muted)}
+.panel-body{padding:1.25rem;min-height:520px;position:relative}
+.center{display:flex;flex-direction:column;align-items:center;padding-top:80px}
+.line{width:2px;height:150px;background:linear-gradient(to bottom,transparent,var(--border),transparent)}
+.orb{width:60px;height:60px;border-radius:50%;background:var(--bg3);border:1px solid var(--border);display:flex;flex-direction:column;align-items:center;justify-content:center;margin:.75rem 0;transition:.5s}
+.orb.active{background:rgba(85,0,0,0.25);border-color:var(--accent2);box-shadow:0 0 40px rgba(122,26,26,0.5)}
+.orb svg{width:22px;height:22px;color:var(--muted);transition:.5s}
+.orb.active svg{color:#cc9999}
+.orb span{font-size:.55rem;color:var(--muted);margin-top:.2rem;font-weight:600}
+.orb.active span{color:#cc9999}
+.section{font-size:.65rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin-bottom:.75rem;margin-top:1rem}
+.section:first-child{margin-top:0}
+.row{margin-bottom:.75rem}
+.label{display:block;font-size:.68rem;color:var(--muted);margin-bottom:.3rem}
+.value{padding:.55rem .8rem;background:var(--bg3);border:1px solid var(--border);border-radius:6px;font-size:.8rem;min-height:34px;display:flex;align-items:center}
+.value.typing{border-color:var(--accent2)}
+.cursor{display:inline-block;width:2px;height:1em;background:var(--accent3);margin-left:2px;animation:blink 1s infinite}
+@keyframes blink{0%,50%{opacity:1}51%,100%{opacity:0}}
+.short{padding:.6rem .8rem;background:var(--bg3);border:1px solid var(--border);border-radius:6px;font-size:.75rem;color:var(--text2);line-height:1.5;min-height:60px;font-style:italic}
+.short.typing{border-color:var(--purple)}
+.short .cursor{background:var(--purple)}
+.short-label{display:flex;align-items:center;gap:.4rem;font-size:.68rem;color:var(--purple);margin-bottom:.3rem}
+.short-label svg{width:12px;height:12px}
+.tags{display:flex;flex-wrap:wrap;gap:.35rem;padding:.55rem .8rem;background:var(--bg3);border:1px solid var(--border);border-radius:6px;min-height:34px}
+.tag{padding:.2rem .5rem;border-radius:100px;font-size:.65rem;opacity:0;transform:scale(.8);transition:.3s}
+.tag.show{opacity:1;transform:scale(1)}
+.student .tag{background:rgba(85,0,0,0.25);border:1px solid rgba(85,0,0,0.3);color:#cc9999}
+.lab .tag{background:rgba(42,90,140,0.25);border:1px solid rgba(42,90,140,0.3);color:#7ab8cc}
+.status{display:flex;align-items:center;gap:.6rem;padding:.75rem;background:var(--bg3);border-radius:8px;margin-top:1rem;opacity:0;transform:translateY(10px);transition:.4s}
+.status.show{opacity:1;transform:translateY(0)}
+.status-icon{width:28px;height:28px;border-radius:50%;background:var(--success);display:flex;align-items:center;justify-content:center}
+.status-icon svg{width:14px;height:14px;color:#fff}
+.status h4{font-size:.8rem;margin-bottom:.1rem}
+.status p{font-size:.7rem;color:var(--muted)}
+.matching{position:absolute;inset:0;background:var(--bg2);padding:1.25rem;opacity:0;pointer-events:none;transition:.4s;display:flex;flex-direction:column}
+.matching.show{opacity:1;pointer-events:auto}
+.matching h4{font-family:var(--serif);font-size:1rem;margin-bottom:.25rem}
+.matching>p{font-size:.75rem;color:var(--muted);margin-bottom:1rem}
+.steps{display:flex;flex-direction:column;gap:.6rem;margin-bottom:1.25rem}
+.step{display:flex;align-items:center;gap:.6rem;padding:.6rem .75rem;background:var(--bg3);border-radius:6px;opacity:.4;transition:.4s}
+.step.active{opacity:1;background:var(--bg);border:1px solid var(--border)}
+.step.done{opacity:1}
+.step-icon{width:24px;height:24px;border-radius:50%;background:var(--bg2);display:flex;align-items:center;justify-content:center}
+.step.active .step-icon{background:rgba(85,0,0,0.25)}
+.step.done .step-icon{background:var(--success)}
+.step-icon svg{width:12px;height:12px;color:var(--muted)}
+.step.active .step-icon svg{color:#cc9999}
+.step.done .step-icon svg{color:#fff}
+.step-text{flex:1}
+.step-text h5{font-size:.75rem;margin-bottom:.1rem}
+.step-text p{font-size:.65rem;color:var(--muted)}
+.step-status{font-size:.6rem;color:var(--muted)}
+.step.active .step-status{color:#cc9999}
+.step.done .step-status{color:var(--success2)}
+.results{flex:1;display:none}
+.results.show{display:block}
+.results-head{display:flex;justify-content:space-between;margin-bottom:.75rem}
+.results-head h4{font-family:var(--serif);font-size:.95rem}
+.results-head span{font-size:.7rem;color:var(--muted)}
+.card{display:flex;align-items:center;gap:.75rem;padding:.7rem;background:var(--bg3);border:1px solid var(--border);border-radius:8px;margin-bottom:.5rem;opacity:0;transform:translateY(10px);transition:.4s}
+.card.show{opacity:1;transform:translateY(0)}
+.card.selected{border-color:var(--success2);background:rgba(45,90,61,0.15)}
+.avatar{width:36px;height:36px;border-radius:50%;background:rgba(85,0,0,0.25);display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:.8rem;color:#cc9999}
+.card-info{flex:1}
+.card-info h5{font-size:.8rem;margin-bottom:.1rem}
+.card-info p{font-size:.65rem;color:var(--muted)}
+.scores{display:flex;gap:.5rem}
+.score{padding:.3rem .5rem;background:var(--bg);border-radius:4px;text-align:center}
+.score-val{font-family:var(--serif);font-size:.9rem;line-height:1}
+.score-val.exp{color:var(--blue)}
+.score-val.fit{color:var(--purple)}
+.score-lbl{font-size:.5rem;color:var(--muted);text-transform:uppercase}
+.invite{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) scale(.9);background:var(--bg2);border:2px solid var(--success2);border-radius:12px;padding:1.5rem;text-align:center;width:90%;max-width:280px;opacity:0;pointer-events:none;transition:.5s;z-index:10;box-shadow:0 20px 60px rgba(0,0,0,0.5)}
+.invite.show{opacity:1;transform:translate(-50%,-50%) scale(1)}
+.invite-icon{width:50px;height:50px;margin:0 auto .75rem;background:var(--success);border-radius:50%;display:flex;align-items:center;justify-content:center}
+.invite-icon svg{width:24px;height:24px;color:#fff}
+.invite h3{font-family:var(--serif);font-size:1.2rem;margin-bottom:.3rem}
+.invite h3 em{font-style:italic;color:var(--success2)}
+.invite>p{font-size:.8rem;color:var(--text2);margin-bottom:1rem}
+.invite-details{background:var(--bg3);border-radius:8px;padding:.75rem;text-align:left}
+.invite-row{display:flex;justify-content:space-between;padding:.35rem 0;font-size:.75rem}
+.invite-row:not(:last-child){border-bottom:1px solid var(--border)}
+.invite-row .lbl{color:var(--muted)}
+.invite-row .val{font-weight:500}
+.cal-note{display:flex;align-items:center;justify-content:center;gap:.4rem;margin-top:.75rem;font-size:.65rem;color:var(--muted)}
+.cal-note svg{width:12px;height:12px}
+@media(max-width:1000px){.split{grid-template-columns:1fr}.center{flex-direction:row;padding:0}.line{width:80px;height:2px;background:linear-gradient(to right,transparent,var(--border),transparent)}nav{padding:1rem 1.5rem}.container{padding:5rem 1rem 2rem}.panel-body{min-height:450px}.arrow{display:none}}
+</style>
+</head>
+<body>
+<nav>
+<div class="nav-left">
+<a href="/" class="logo">Scholr<span>AI</span></a>
+<div class="badge">Interactive Demo</div>
+</div>
+<button class="restart" onclick="restart()">Restart</button>
+</nav>
+<div class="container">
+<div class="header">
+<h1>Meeting <em>Supply & Demand</em> for Research</h1>
+<p>No resumes. No cover letters. Just the right students for the right labs.</p>
+</div>
+<div class="phases">
+<div class="phase active" id="p1"><span class="phase-num">1</span>Student Profile</div>
+<span class="arrow">→</span>
+<div class="phase" id="p2"><span class="phase-num">2</span>Lab Request</div>
+<span class="arrow">→</span>
+<div class="phase" id="p3"><span class="phase-num">3</span>ML Matching</div>
+<span class="arrow">→</span>
+<div class="phase" id="p4"><span class="phase-num">4</span>Auto-Schedule</div>
+</div>
+<div class="split">
+<div class="panel student">
+<div class="panel-head">
+<div class="panel-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+<div><div class="panel-title">Student</div><div class="panel-sub">Create profile once, get discovered</div></div>
+</div>
+<div class="panel-body">
+<div class="section">Background</div>
+<div class="row"><div class="label">Name</div><div class="value" id="sName"><span class="cursor"></span></div></div>
+<div class="row"><div class="label">Education</div><div class="value" id="sEdu"></div></div>
+<div class="row"><div class="label">Experience</div><div class="tags" id="sExp"><span class="tag">ML Research @ BAIR</span><span class="tag">CS 229 TA</span><span class="tag">Genomics Lab</span></div></div>
+<div class="row"><div class="label">Skills</div><div class="tags" id="sSkills"><span class="tag">Python</span><span class="tag">PyTorch</span><span class="tag">R</span><span class="tag">Wet Lab</span></div></div>
+<div class="section">Short Answers</div>
+<div class="row"><div class="short-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>Designed with Stanford Psychology</div><div class="short" id="sShort"></div></div>
+<div class="status" id="sStatus"><div class="status-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></div><div><h4>Profile Complete</h4><p>In the talent pool — no applications needed</p></div></div>
+<div class="invite" id="invite">
+<div class="invite-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
+<h3>Interview <em>Scheduled!</em></h3>
+<p>Added to your calendar automatically</p>
+<div class="invite-details">
+<div class="invite-row"><span class="lbl">Lab</span><span class="val">Chen Lab</span></div>
+<div class="invite-row"><span class="lbl">Role</span><span class="val">ML Research Assistant</span></div>
+<div class="invite-row"><span class="lbl">When</span><span class="val">Tue, Jan 28 · 2:30 PM</span></div>
+<div class="invite-row"><span class="lbl">Where</span><span class="val">Zoom (link in invite)</span></div>
+</div>
+<div class="cal-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Synced with Google Calendar</div>
+</div>
+</div>
+</div>
+<div class="center">
+<div class="line"></div>
+<div class="orb" id="orb"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg><span>ML</span></div>
+<div class="line"></div>
+</div>
+<div class="panel lab">
+<div class="panel-head">
+<div class="panel-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></div>
+<div><div class="panel-title">Lab / PI</div><div class="panel-sub">Request qualified candidates</div></div>
+</div>
+<div class="panel-body">
+<div id="labForm">
+<div class="section">Position Request</div>
+<div class="row"><div class="label">Lab</div><div class="value" id="lName"></div></div>
+<div class="row"><div class="label">Position</div><div class="value" id="lPos"></div></div>
+<div class="row"><div class="label"># of Interview Slots</div><div class="value" id="lSlots"></div></div>
+<div class="row"><div class="label">Required Qualifications</div><div class="tags" id="lQuals"><span class="tag">Python</span><span class="tag">ML/DL Experience</span><span class="tag">Biology Coursework</span></div></div>
+<div class="row"><div class="label">Preferred Qualities</div><div class="tags" id="lTraits"><span class="tag">Independent</span><span class="tag">Curious</span><span class="tag">Collaborative</span></div></div>
+<div class="status" id="lStatus"><div class="status-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></div><div><h4>Request Submitted</h4><p>Searching 1,200+ student profiles...</p></div></div>
+</div>
+<div class="matching" id="matching">
+<h4>Finding Candidates</h4>
+<p>Analyzing qualifications and values</p>
+<div class="steps">
+<div class="step" id="st1"><div class="step-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div><div class="step-text"><h5>Experience Analysis</h5><p>Quantifying education, work, research</p></div><span class="step-status" id="st1s">Waiting</span></div>
+<div class="step" id="st2"><div class="step-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg></div><div class="step-text"><h5>Values Matching</h5><p>Qualitative fit from short answers</p></div><span class="step-status" id="st2s">Waiting</span></div>
+<div class="step" id="st3"><div class="step-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div><div class="step-text"><h5>Ranking</h5><p>Ordering candidates by fit score</p></div><span class="step-status" id="st3s">Waiting</span></div>
+</div>
+<div class="results" id="results">
+<div class="results-head"><h4>Top 3 Candidates</h4><span>of 47 qualified</span></div>
+<div class="card" id="c1"><div class="avatar">AT</div><div class="card-info"><h5>Alex Thompson</h5><p>Stanford · CS '26 · BAIR, Genomics</p></div><div class="scores"><div class="score"><div class="score-val exp">94</div><div class="score-lbl">Exp</div></div><div class="score"><div class="score-val fit">97</div><div class="score-lbl">Fit</div></div></div></div>
+<div class="card" id="c2"><div class="avatar">JL</div><div class="card-info"><h5>Jordan Lee</h5><p>MIT · Biology '25 · Broad Institute</p></div><div class="scores"><div class="score"><div class="score-val exp">91</div><div class="score-lbl">Exp</div></div><div class="score"><div class="score-val fit">88</div><div class="score-lbl">Fit</div></div></div></div>
+<div class="card" id="c3"><div class="avatar">SP</div><div class="card-info"><h5>Sam Patel</h5><p>Berkeley · Bioeng '26 · UCSF</p></div><div class="scores"><div class="score"><div class="score-val exp">87</div><div class="score-lbl">Exp</div></div><div class="score"><div class="score-val fit">85</div><div class="score-lbl">Fit</div></div></div></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<script>
+function type(id,txt,cb,spd=35){const el=document.getElementById(id);el.innerHTML='<span class="cursor"></span>';el.classList.add('typing');let i=0;const int=setInterval(()=>{if(i<txt.length){el.innerHTML=txt.slice(0,i+1)+'<span class="cursor"></span>';i++}else{clearInterval(int);el.innerHTML=txt;el.classList.remove('typing');if(cb)setTimeout(cb,150)}},spd)}
+function tags(id,cb){const t=document.querySelectorAll('#'+id+' .tag');let i=0;const int=setInterval(()=>{if(i<t.length){t[i].classList.add('show');i++}else{clearInterval(int);if(cb)setTimeout(cb,200)}},120)}
+function phase(n){document.querySelectorAll('.phase').forEach((el,i)=>{el.classList.remove('active','done');if(i<n-1)el.classList.add('done');if(i===n-1)el.classList.add('active')})}
+function show(id){document.getElementById(id).classList.add('show')}
+function hide(id){document.getElementById(id).classList.remove('show')}
+function run(){
+phase(1);
+setTimeout(()=>{
+type('sName','Alex Thompson',()=>{
+type('sEdu','Stanford University · CS · Sophomore',()=>{
+tags('sExp',()=>{
+tags('sSkills',()=>{
+type('sShort',"I'm driven by bridging computational methods with biological discovery. After working at BAIR, I realized the most exciting problems live at this intersection...",()=>{
+show('sStatus');
+setTimeout(()=>{phase(2);labSide()},1000)
+},20)
+})
+})
+})
+})
+},400)
+}
+function labSide(){
+type('lName','Chen Lab — Stanford Bioengineering',()=>{
+type('lPos','ML Research Assistant',()=>{
+type('lSlots','3 interview slots available',()=>{
+tags('lQuals',()=>{
+tags('lTraits',()=>{
+show('lStatus');
+setTimeout(()=>{phase(3);document.getElementById('orb').classList.add('active');match()},1200)
+})
+})
+})
+})
+})
+}
+function match(){
+show('matching');
+setTimeout(()=>{
+document.getElementById('st1').classList.add('active');document.getElementById('st1s').textContent='Processing...';
+setTimeout(()=>{
+document.getElementById('st1').classList.remove('active');document.getElementById('st1').classList.add('done');document.getElementById('st1s').textContent='✓ Done';
+document.getElementById('st2').classList.add('active');document.getElementById('st2s').textContent='Analyzing...';
+setTimeout(()=>{
+document.getElementById('st2').classList.remove('active');document.getElementById('st2').classList.add('done');document.getElementById('st2s').textContent='✓ Done';
+document.getElementById('st3').classList.add('active');document.getElementById('st3s').textContent='Ranking...';
+setTimeout(()=>{
+document.getElementById('st3').classList.remove('active');document.getElementById('st3').classList.add('done');document.getElementById('st3s').textContent='✓ Done';
+setTimeout(()=>{
+show('results');
+setTimeout(()=>show('c1'),150);
+setTimeout(()=>show('c2'),350);
+setTimeout(()=>show('c3'),550);
+setTimeout(()=>{
+document.getElementById('c1').classList.add('selected');
+setTimeout(()=>{phase(4);show('invite');setTimeout(restart,6000)},1500)
+},1500)
+},500)
+},800)
+},1000)
+},1000)
+},500)
+}
+function restart(){
+['sName','sEdu','sShort','lName','lPos','lSlots'].forEach(id=>{document.getElementById(id).innerHTML=''});
+document.getElementById('sName').innerHTML='<span class="cursor"></span>';
+document.querySelectorAll('.tag').forEach(t=>t.classList.remove('show'));
+['sStatus','lStatus','matching','results','invite'].forEach(id=>hide(id));
+['st1','st2','st3'].forEach(id=>{document.getElementById(id).classList.remove('active','done');document.getElementById(id+'s').textContent='Waiting'});
+['c1','c2','c3'].forEach(id=>{document.getElementById(id).classList.remove('show','selected')});
+document.getElementById('orb').classList.remove('active');
+run()
+}
+run()
+</script>
+</body>
+</html>
