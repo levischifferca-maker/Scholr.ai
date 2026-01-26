@@ -173,7 +173,8 @@ nav{position:fixed;top:0;left:0;right:0;padding:1rem 3rem;display:flex;justify-c
 <div class="section">Background</div>
 <div class="row"><div class="label">Name</div><div class="value" id="sName"><span class="cursor"></span></div></div>
 <div class="row"><div class="label">Education</div><div class="value" id="sEdu"></div></div>
-<div class="row"><div class="label">Skills</div><div class="tags" id="sSkills"><span class="tag">Python</span><span class="tag">R</span><span class="tag">Statistical Analysis</span><span class="tag">Lab Work</span></div></div>
+<div class="row"><div class="label">Experience</div><div class="tags" id="sExp"><span class="tag">RA — Cognitive Neuroscience Lab</span><span class="tag">Psych 101 Section Leader</span><span class="tag">Summer Intern — NIMH</span></div></div>
+<div class="row"><div class="label">Skills</div><div class="tags" id="sSkills"><span class="tag">Python</span><span class="tag">R</span><span class="tag">SPSS</span><span class="tag">EEG Analysis</span></div></div>
 
 <div class="section">Short Answers</div>
 <div class="row">
@@ -260,6 +261,7 @@ phase(1);
 setTimeout(()=>{
 type('sName','Alex Thompson',()=>{
 type('sEdu','Stanford University · Psychology · Junior',()=>{
+tags('sExp',()=>{
 tags('sSkills',()=>{
 type('sShort1',answers.s1,()=>{
 type('sShort2',answers.s2,()=>{
@@ -269,6 +271,7 @@ setTimeout(()=>{phase(2);labSide()},1000)
 },25)
 },25)
 },25)
+})
 })
 })
 })
