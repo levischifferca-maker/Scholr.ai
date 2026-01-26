@@ -18,10 +18,14 @@ nav{position:fixed;top:0;left:0;right:0;padding:1rem 3rem;display:flex;justify-c
 .restart{padding:.5rem 1rem;background:0;border:1px solid var(--border);border-radius:6px;font-size:.8rem;color:var(--muted);cursor:pointer}
 .restart:hover{border-color:var(--accent2);color:var(--text)}
 .container{max-width:1400px;margin:0 auto;padding:6rem 2rem 3rem}
-.header{text-align:center;margin-bottom:1.5rem}
+.header{text-align:center;margin-bottom:1rem}
 .header h1{font-family:var(--serif);font-size:clamp(1.75rem,4vw,2.5rem);font-weight:400;margin-bottom:.5rem}
 .header h1 em{font-style:italic;color:#cc9999}
 .header p{color:var(--text2);font-size:.95rem}
+.authenticity-note{max-width:700px;margin:0 auto 2rem;padding:1.25rem 1.5rem;background:linear-gradient(135deg,rgba(85,0,0,0.15),rgba(107,74,156,0.1));border:1px solid rgba(85,0,0,0.3);border-radius:12px;text-align:center}
+.authenticity-note h3{font-family:var(--serif);font-size:1.1rem;font-weight:500;margin-bottom:.5rem;color:#cc9999}
+.authenticity-note p{font-size:.85rem;color:var(--text2);line-height:1.6}
+.authenticity-note strong{color:var(--text)}
 .phases{display:flex;justify-content:center;gap:.5rem;margin-bottom:2rem;flex-wrap:wrap}
 .phase{display:flex;align-items:center;gap:.4rem;font-size:.75rem;color:var(--muted);padding:.4rem .75rem;border-radius:100px}
 .phase.active{color:#cc9999;background:rgba(85,0,0,0.25)}
@@ -41,8 +45,8 @@ nav{position:fixed;top:0;left:0;right:0;padding:1rem 3rem;display:flex;justify-c
 .lab .panel-icon svg{color:#7ab8cc}
 .panel-title{font-family:var(--serif);font-size:1.05rem}
 .panel-sub{font-size:.7rem;color:var(--muted)}
-.panel-body{padding:1.25rem;min-height:520px;position:relative}
-.center{display:flex;flex-direction:column;align-items:center;padding-top:80px}
+.panel-body{padding:1.25rem;min-height:580px;position:relative}
+.center{display:flex;flex-direction:column;align-items:center;padding-top:100px}
 .line{width:2px;height:150px;background:linear-gradient(to bottom,transparent,var(--border),transparent)}
 .orb{width:60px;height:60px;border-radius:50%;background:var(--bg3);border:1px solid var(--border);display:flex;flex-direction:column;align-items:center;justify-content:center;margin:.75rem 0;transition:.5s}
 .orb.active{background:rgba(85,0,0,0.25);border-color:var(--accent2);box-shadow:0 0 40px rgba(122,26,26,0.5)}
@@ -58,11 +62,13 @@ nav{position:fixed;top:0;left:0;right:0;padding:1rem 3rem;display:flex;justify-c
 .value.typing{border-color:var(--accent2)}
 .cursor{display:inline-block;width:2px;height:1em;background:var(--accent3);margin-left:2px;animation:blink 1s infinite}
 @keyframes blink{0%,50%{opacity:1}51%,100%{opacity:0}}
-.short{padding:.6rem .8rem;background:var(--bg3);border:1px solid var(--border);border-radius:6px;font-size:.75rem;color:var(--text2);line-height:1.5;min-height:60px;font-style:italic}
+.short{padding:.6rem .8rem;background:var(--bg3);border:1px solid var(--border);border-radius:6px;font-size:.75rem;color:var(--text2);line-height:1.5;min-height:50px;font-style:italic}
 .short.typing{border-color:var(--purple)}
 .short .cursor{background:var(--purple)}
-.short-label{display:flex;align-items:center;gap:.4rem;font-size:.68rem;color:var(--purple);margin-bottom:.3rem}
-.short-label svg{width:12px;height:12px}
+.short-label{display:flex;align-items:center;justify-content:space-between;font-size:.68rem;color:var(--purple);margin-bottom:.3rem}
+.short-label svg{width:12px;height:12px;margin-right:.3rem}
+.short-label .left{display:flex;align-items:center}
+.short-label .hint{font-size:.6rem;color:var(--muted);font-weight:400}
 .tags{display:flex;flex-wrap:wrap;gap:.35rem;padding:.55rem .8rem;background:var(--bg3);border:1px solid var(--border);border-radius:6px;min-height:34px}
 .tag{padding:.2rem .5rem;border-radius:100px;font-size:.65rem;opacity:0;transform:scale(.8);transition:.3s}
 .tag.show{opacity:1;transform:scale(1)}
@@ -126,7 +132,7 @@ nav{position:fixed;top:0;left:0;right:0;padding:1rem 3rem;display:flex;justify-c
 .invite-row .val{font-weight:500}
 .cal-note{display:flex;align-items:center;justify-content:center;gap:.4rem;margin-top:.75rem;font-size:.65rem;color:var(--muted)}
 .cal-note svg{width:12px;height:12px}
-@media(max-width:1000px){.split{grid-template-columns:1fr}.center{flex-direction:row;padding:0}.line{width:80px;height:2px;background:linear-gradient(to right,transparent,var(--border),transparent)}nav{padding:1rem 1.5rem}.container{padding:5rem 1rem 2rem}.panel-body{min-height:450px}.arrow{display:none}}
+@media(max-width:1000px){.split{grid-template-columns:1fr}.center{flex-direction:row;padding:0}.line{width:80px;height:2px;background:linear-gradient(to right,transparent,var(--border),transparent)}nav{padding:1rem 1.5rem}.container{padding:5rem 1rem 2rem}.panel-body{min-height:500px}.arrow{display:none}}
 </style>
 </head>
 <body>
@@ -142,6 +148,12 @@ nav{position:fixed;top:0;left:0;right:0;padding:1rem 3rem;display:flex;justify-c
 <h1>Meeting <em>Supply & Demand</em> for Research</h1>
 <p>No resumes. No cover letters. Just the right students for the right labs.</p>
 </div>
+
+<div class="authenticity-note">
+<h3>Designed for authenticity, not optimization</h3>
+<p>Our questions have no "right" answers — they reveal how you think and work. <strong>Gaming the system only leads to bad matches.</strong> The more honest you are, the better your fit.</p>
+</div>
+
 <div class="phases">
 <div class="phase active" id="p1"><span class="phase-num">1</span>Student Profile</div>
 <span class="arrow">→</span>
@@ -161,18 +173,30 @@ nav{position:fixed;top:0;left:0;right:0;padding:1rem 3rem;display:flex;justify-c
 <div class="section">Background</div>
 <div class="row"><div class="label">Name</div><div class="value" id="sName"><span class="cursor"></span></div></div>
 <div class="row"><div class="label">Education</div><div class="value" id="sEdu"></div></div>
-<div class="row"><div class="label">Experience</div><div class="tags" id="sExp"><span class="tag">ML Research @ BAIR</span><span class="tag">CS 229 TA</span><span class="tag">Genomics Lab</span></div></div>
-<div class="row"><div class="label">Skills</div><div class="tags" id="sSkills"><span class="tag">Python</span><span class="tag">PyTorch</span><span class="tag">R</span><span class="tag">Wet Lab</span></div></div>
+<div class="row"><div class="label">Skills</div><div class="tags" id="sSkills"><span class="tag">Python</span><span class="tag">R</span><span class="tag">Statistical Analysis</span><span class="tag">Lab Work</span></div></div>
+
 <div class="section">Short Answers</div>
-<div class="row"><div class="short-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>Designed with Stanford Psychology</div><div class="short" id="sShort"></div></div>
+<div class="row">
+<div class="short-label"><span class="left"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>What question are you thinking about lately?</span><span class="hint">No right answer</span></div>
+<div class="short" id="sShort1"></div>
+</div>
+<div class="row">
+<div class="short-label"><span class="left"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>When you're stuck, what do you do first?</span><span class="hint">No right answer</span></div>
+<div class="short" id="sShort2"></div>
+</div>
+<div class="row">
+<div class="short-label"><span class="left"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>What's the last rabbit hole you went down?</span><span class="hint">No right answer</span></div>
+<div class="short" id="sShort3"></div>
+</div>
+
 <div class="status" id="sStatus"><div class="status-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></div><div><h4>Profile Complete</h4><p>In the talent pool — no applications needed</p></div></div>
 <div class="invite" id="invite">
 <div class="invite-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
 <h3>Interview <em>Scheduled!</em></h3>
 <p>Added to your calendar automatically</p>
 <div class="invite-details">
-<div class="invite-row"><span class="lbl">Lab</span><span class="val">Chen Lab</span></div>
-<div class="invite-row"><span class="lbl">Role</span><span class="val">ML Research Assistant</span></div>
+<div class="invite-row"><span class="lbl">Lab</span><span class="val">Martinez Lab</span></div>
+<div class="invite-row"><span class="lbl">Role</span><span class="val">Research Assistant</span></div>
 <div class="invite-row"><span class="lbl">When</span><span class="val">Tue, Jan 28 · 2:30 PM</span></div>
 <div class="invite-row"><span class="lbl">Where</span><span class="val">Zoom (link in invite)</span></div>
 </div>
@@ -195,24 +219,23 @@ nav{position:fixed;top:0;left:0;right:0;padding:1rem 3rem;display:flex;justify-c
 <div class="section">Position Request</div>
 <div class="row"><div class="label">Lab</div><div class="value" id="lName"></div></div>
 <div class="row"><div class="label">Position</div><div class="value" id="lPos"></div></div>
-<div class="row"><div class="label"># of Interview Slots</div><div class="value" id="lSlots"></div></div>
-<div class="row"><div class="label">Required Qualifications</div><div class="tags" id="lQuals"><span class="tag">Python</span><span class="tag">ML/DL Experience</span><span class="tag">Biology Coursework</span></div></div>
-<div class="row"><div class="label">Preferred Qualities</div><div class="tags" id="lTraits"><span class="tag">Independent</span><span class="tag">Curious</span><span class="tag">Collaborative</span></div></div>
+<div class="row"><div class="label">Required Qualifications</div><div class="tags" id="lQuals"><span class="tag">Statistics</span><span class="tag">R or Python</span><span class="tag">Psych Coursework</span></div></div>
+<div class="row"><div class="label">Ideal Candidate</div><div class="tags" id="lTraits"><span class="tag">Self-directed</span><span class="tag">Comfortable with ambiguity</span><span class="tag">Asks questions</span></div></div>
 <div class="status" id="lStatus"><div class="status-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></div><div><h4>Request Submitted</h4><p>Searching 1,200+ student profiles...</p></div></div>
 </div>
 <div class="matching" id="matching">
 <h4>Finding Candidates</h4>
-<p>Analyzing qualifications and values</p>
+<p>Analyzing qualifications and thinking style</p>
 <div class="steps">
-<div class="step" id="st1"><div class="step-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div><div class="step-text"><h5>Experience Analysis</h5><p>Quantifying education, work, research</p></div><span class="step-status" id="st1s">Waiting</span></div>
-<div class="step" id="st2"><div class="step-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg></div><div class="step-text"><h5>Values Matching</h5><p>Qualitative fit from short answers</p></div><span class="step-status" id="st2s">Waiting</span></div>
-<div class="step" id="st3"><div class="step-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div><div class="step-text"><h5>Ranking</h5><p>Ordering candidates by fit score</p></div><span class="step-status" id="st3s">Waiting</span></div>
+<div class="step" id="st1"><div class="step-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div><div class="step-text"><h5>Skills & Experience</h5><p>Verified coursework and background</p></div><span class="step-status" id="st1s">Waiting</span></div>
+<div class="step" id="st2"><div class="step-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg></div><div class="step-text"><h5>Work Style Analysis</h5><p>Matching thinking patterns to lab culture</p></div><span class="step-status" id="st2s">Waiting</span></div>
+<div class="step" id="st3"><div class="step-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div><div class="step-text"><h5>Ranking</h5><p>Ordering by mutual fit</p></div><span class="step-status" id="st3s">Waiting</span></div>
 </div>
 <div class="results" id="results">
-<div class="results-head"><h4>Top 3 Candidates</h4><span>of 47 qualified</span></div>
-<div class="card" id="c1"><div class="avatar">AT</div><div class="card-info"><h5>Alex Thompson</h5><p>Stanford · CS '26 · BAIR, Genomics</p></div><div class="scores"><div class="score"><div class="score-val exp">94</div><div class="score-lbl">Exp</div></div><div class="score"><div class="score-val fit">97</div><div class="score-lbl">Fit</div></div></div></div>
-<div class="card" id="c2"><div class="avatar">JL</div><div class="card-info"><h5>Jordan Lee</h5><p>MIT · Biology '25 · Broad Institute</p></div><div class="scores"><div class="score"><div class="score-val exp">91</div><div class="score-lbl">Exp</div></div><div class="score"><div class="score-val fit">88</div><div class="score-lbl">Fit</div></div></div></div>
-<div class="card" id="c3"><div class="avatar">SP</div><div class="card-info"><h5>Sam Patel</h5><p>Berkeley · Bioeng '26 · UCSF</p></div><div class="scores"><div class="score"><div class="score-val exp">87</div><div class="score-lbl">Exp</div></div><div class="score"><div class="score-val fit">85</div><div class="score-lbl">Fit</div></div></div></div>
+<div class="results-head"><h4>Top Matches</h4><span>Ranked by fit, not keywords</span></div>
+<div class="card" id="c1"><div class="avatar">AT</div><div class="card-info"><h5>Alex Thompson</h5><p>Stanford · Psych '26</p></div><div class="scores"><div class="score"><div class="score-val exp">91</div><div class="score-lbl">Skills</div></div><div class="score"><div class="score-val fit">96</div><div class="score-lbl">Fit</div></div></div></div>
+<div class="card" id="c2"><div class="avatar">MR</div><div class="card-info"><h5>Maya Reyes</h5><p>Berkeley · CogSci '25</p></div><div class="scores"><div class="score"><div class="score-val exp">94</div><div class="score-lbl">Skills</div></div><div class="score"><div class="score-val fit">82</div><div class="score-lbl">Fit</div></div></div></div>
+<div class="card" id="c3"><div class="avatar">JK</div><div class="card-info"><h5>James Kim</h5><p>Stanford · Neuro '26</p></div><div class="scores"><div class="score"><div class="score-val exp">88</div><div class="score-lbl">Skills</div></div><div class="score"><div class="score-val fit">79</div><div class="score-lbl">Fit</div></div></div></div>
 </div>
 </div>
 </div>
@@ -220,32 +243,41 @@ nav{position:fixed;top:0;left:0;right:0;padding:1rem 3rem;display:flex;justify-c
 </div>
 </div>
 <script>
-function type(id,txt,cb,spd=35){const el=document.getElementById(id);el.innerHTML='<span class="cursor"></span>';el.classList.add('typing');let i=0;const int=setInterval(()=>{if(i<txt.length){el.innerHTML=txt.slice(0,i+1)+'<span class="cursor"></span>';i++}else{clearInterval(int);el.innerHTML=txt;el.classList.remove('typing');if(cb)setTimeout(cb,150)}},spd)}
+const answers = {
+    s1: "Whether memories are stored in specific neurons or distributed patterns. I keep reading conflicting papers and can't figure out who's right.",
+    s2: "Usually I'll re-read the problem from scratch, like I'm seeing it for the first time. If that doesn't work, I go for a walk and explain it out loud to myself.",
+    s3: "Spent a whole weekend reading about how blind people dream. Started with one podcast and ended up in neuroscience journals at 3am."
+};
+
+function type(id,txt,cb,spd=30){const el=document.getElementById(id);el.innerHTML='<span class="cursor"></span>';el.classList.add('typing');let i=0;const int=setInterval(()=>{if(i<txt.length){el.innerHTML=txt.slice(0,i+1)+'<span class="cursor"></span>';i++}else{clearInterval(int);el.innerHTML=txt;el.classList.remove('typing');if(cb)setTimeout(cb,150)}},spd)}
 function tags(id,cb){const t=document.querySelectorAll('#'+id+' .tag');let i=0;const int=setInterval(()=>{if(i<t.length){t[i].classList.add('show');i++}else{clearInterval(int);if(cb)setTimeout(cb,200)}},120)}
 function phase(n){document.querySelectorAll('.phase').forEach((el,i)=>{el.classList.remove('active','done');if(i<n-1)el.classList.add('done');if(i===n-1)el.classList.add('active')})}
 function show(id){document.getElementById(id).classList.add('show')}
 function hide(id){document.getElementById(id).classList.remove('show')}
+
 function run(){
 phase(1);
 setTimeout(()=>{
 type('sName','Alex Thompson',()=>{
-type('sEdu','Stanford University · CS · Sophomore',()=>{
-tags('sExp',()=>{
+type('sEdu','Stanford University · Psychology · Junior',()=>{
 tags('sSkills',()=>{
-type('sShort',"I'm driven by bridging computational methods with biological discovery. After working at BAIR, I realized the most exciting problems live at this intersection...",()=>{
+type('sShort1',answers.s1,()=>{
+type('sShort2',answers.s2,()=>{
+type('sShort3',answers.s3,()=>{
 show('sStatus');
 setTimeout(()=>{phase(2);labSide()},1000)
-},20)
-})
+},25)
+},25)
+},25)
 })
 })
 })
 },400)
 }
+
 function labSide(){
-type('lName','Chen Lab — Stanford Bioengineering',()=>{
-type('lPos','ML Research Assistant',()=>{
-type('lSlots','3 interview slots available',()=>{
+type('lName','Martinez Lab — Stanford Psychology',()=>{
+type('lPos','Research Assistant — Memory & Cognition',()=>{
 tags('lQuals',()=>{
 tags('lTraits',()=>{
 show('lStatus');
@@ -254,8 +286,8 @@ setTimeout(()=>{phase(3);document.getElementById('orb').classList.add('active');
 })
 })
 })
-})
 }
+
 function match(){
 show('matching');
 setTimeout(()=>{
@@ -283,8 +315,9 @@ setTimeout(()=>{phase(4);show('invite');setTimeout(restart,6000)},1500)
 },1000)
 },500)
 }
+
 function restart(){
-['sName','sEdu','sShort','lName','lPos','lSlots'].forEach(id=>{document.getElementById(id).innerHTML=''});
+['sName','sEdu','sShort1','sShort2','sShort3','lName','lPos'].forEach(id=>{document.getElementById(id).innerHTML=''});
 document.getElementById('sName').innerHTML='<span class="cursor"></span>';
 document.querySelectorAll('.tag').forEach(t=>t.classList.remove('show'));
 ['sStatus','lStatus','matching','results','invite'].forEach(id=>hide(id));
