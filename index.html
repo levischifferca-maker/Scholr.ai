@@ -57,6 +57,7 @@
         }
 
         .nav-left { display: flex; align-items: center; gap: 1.5rem; }
+        .nav-right { display: flex; align-items: center; gap: 1.5rem; }
 
         .logo {
             font-family: var(--serif);
@@ -82,6 +83,22 @@
             background: var(--accent);
             border-color: var(--accent-light);
             color: var(--text-primary);
+        }
+
+        .login-btn {
+            padding: 0.5rem 1.25rem;
+            background: var(--accent);
+            border: 1px solid var(--accent-light);
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: var(--text-primary);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        .login-btn:hover {
+            background: var(--accent-light);
+            transform: translateY(-2px);
         }
 
         .nav-status {
@@ -205,21 +222,6 @@
 
         .form-note { font-size: 0.8rem; color: var(--text-muted); }
 
-        .success-message {
-            display: none;
-            flex-direction: column;
-            align-items: center;
-            gap: 1rem;
-            padding: 2rem;
-            background: var(--accent-dim);
-            border: 1px solid rgba(85, 0, 0, 0.4);
-            border-radius: 12px;
-        }
-        .success-message.show { display: flex; }
-        .success-message svg { width: 40px; height: 40px; color: #cc9999; }
-        .success-message h3 { font-family: var(--serif); font-size: 1.4rem; }
-        .success-message p { color: var(--text-secondary); }
-
         .scroll-indicator {
             position: absolute;
             bottom: 2rem;
@@ -329,10 +331,7 @@
             align-items: center;
         }
 
-        .network-visual {
-            position: relative;
-            height: 500px;
-        }
+        .network-visual { position: relative; height: 500px; }
         .network-visual svg { width: 100%; height: 100%; }
 
         .network-content h2 {
@@ -382,11 +381,7 @@
             align-items: center;
         }
 
-        .research-visual {
-            position: relative;
-            height: 500px;
-            order: 2;
-        }
+        .research-visual { position: relative; height: 500px; order: 2; }
         .research-visual svg { width: 100%; height: 100%; }
         .research-content { order: 1; }
 
@@ -405,11 +400,7 @@
             margin-bottom: 2rem;
         }
 
-        .lab-stats {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1.5rem;
-        }
+        .lab-stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
 
         .lab-stat {
             padding: 1.25rem;
@@ -519,6 +510,7 @@
 
         @media (max-width: 900px) {
             nav { padding: 1.5rem 2rem; }
+            .nav-status { display: none; }
             .stats-grid { grid-template-columns: repeat(2, 1fr); }
             .network-container, .research-container { grid-template-columns: 1fr; gap: 3rem; }
             .network-visual, .research-visual { height: 350px; order: 0; }
@@ -535,6 +527,8 @@
             .submit-btn { width: 100%; }
             .lab-stats { grid-template-columns: 1fr; }
             footer { flex-direction: column; gap: 1rem; text-align: center; padding: 2rem; }
+            .nav-right { gap: 0.75rem; }
+            .login-btn { padding: 0.5rem 0.75rem; font-size: 0.75rem; }
         }
     </style>
 </head>
@@ -542,11 +536,14 @@
     <nav>
         <div class="nav-left">
             <a href="/" class="logo">Scholr<span>AI</span></a>
-            <a href="/demo" class="demo-btn">Demo</a>
+            <a href="https://scholr-demo-imdj3ihkv-scholrai.vercel.app" class="demo-btn">Demo</a>
         </div>
-        <div class="nav-status">
-            <span class="pulse"></span>
-            Coming Soon
+        <div class="nav-right">
+            <div class="nav-status">
+                <span class="pulse"></span>
+                Coming Soon
+            </div>
+            <a href="https://scholr-demo-imdj3ihkv-scholrai.vercel.app" class="login-btn">Login</a>
         </div>
     </nav>
 
@@ -565,15 +562,6 @@
                 </div>
                 <p class="form-note">Be the first to know when we launch.</p>
             </form>
-
-            <div class="success-message" id="success-message">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
-                    <polyline points="22 4 12 14.01 9 11.01"/>
-                </svg>
-                <h3>You're on the list</h3>
-                <p>We'll be in touch soon with early access.</p>
-            </div>
         </div>
 
         <div class="scroll-indicator">
@@ -619,75 +607,39 @@
                             <stop offset="100%" stop-color="#7a1a1a" stop-opacity="0.1"/>
                         </linearGradient>
                     </defs>
-                    
                     <g stroke="url(#lineGrad)" stroke-width="1.5">
-                        <line x1="80" y1="80" x2="200" y2="100"><animate attributeName="opacity" values="0.2;0.7;0.2" dur="3s" repeatCount="indefinite"/></line>
                         <line x1="80" y1="80" x2="200" y2="200"><animate attributeName="opacity" values="0.4;0.8;0.4" dur="2.5s" repeatCount="indefinite"/></line>
-                        <line x1="80" y1="80" x2="200" y2="300"><animate attributeName="opacity" values="0.3;0.6;0.3" dur="3.5s" repeatCount="indefinite"/></line>
-                        <line x1="80" y1="200" x2="200" y2="100"><animate attributeName="opacity" values="0.5;0.9;0.5" dur="2s" repeatCount="indefinite"/></line>
                         <line x1="80" y1="200" x2="200" y2="200"><animate attributeName="opacity" values="0.3;0.7;0.3" dur="4s" repeatCount="indefinite"/></line>
-                        <line x1="80" y1="200" x2="200" y2="300"><animate attributeName="opacity" values="0.4;0.8;0.4" dur="3s" repeatCount="indefinite"/></line>
-                        <line x1="80" y1="320" x2="200" y2="100"><animate attributeName="opacity" values="0.2;0.5;0.2" dur="3.5s" repeatCount="indefinite"/></line>
                         <line x1="80" y1="320" x2="200" y2="200"><animate attributeName="opacity" values="0.5;0.8;0.5" dur="2.5s" repeatCount="indefinite"/></line>
-                        <line x1="80" y1="320" x2="200" y2="300"><animate attributeName="opacity" values="0.3;0.7;0.3" dur="4s" repeatCount="indefinite"/></line>
-                        <line x1="200" y1="100" x2="320" y2="150"><animate attributeName="opacity" values="0.3;0.7;0.3" dur="3s" repeatCount="indefinite" begin="0.5s"/></line>
-                        <line x1="200" y1="100" x2="320" y2="250"><animate attributeName="opacity" values="0.2;0.6;0.2" dur="2.5s" repeatCount="indefinite" begin="0.5s"/></line>
                         <line x1="200" y1="200" x2="320" y2="150"><animate attributeName="opacity" values="0.5;0.9;0.5" dur="4s" repeatCount="indefinite" begin="0.5s"/></line>
                         <line x1="200" y1="200" x2="320" y2="250"><animate attributeName="opacity" values="0.4;0.8;0.4" dur="3s" repeatCount="indefinite" begin="0.5s"/></line>
-                        <line x1="200" y1="300" x2="320" y2="150"><animate attributeName="opacity" values="0.3;0.6;0.3" dur="3.5s" repeatCount="indefinite" begin="0.5s"/></line>
-                        <line x1="200" y1="300" x2="320" y2="250"><animate attributeName="opacity" values="0.4;0.7;0.4" dur="2s" repeatCount="indefinite" begin="0.5s"/></line>
                     </g>
-                    
                     <g>
                         <circle cx="80" cy="80" r="16" fill="#550000"><animate attributeName="r" values="16;18;16" dur="3s" repeatCount="indefinite"/></circle>
-                        <circle cx="80" cy="80" r="24" stroke="#7a1a1a" stroke-width="1" fill="none" opacity="0.3"><animate attributeName="r" values="24;30;24" dur="3s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.3;0.1;0.3" dur="3s" repeatCount="indefinite"/></circle>
                         <text x="80" y="50" text-anchor="middle" fill="#5a5a5a" font-size="10" font-family="Inter">STUDENT</text>
-                        
                         <circle cx="80" cy="200" r="16" fill="#550000"><animate attributeName="r" values="16;18;16" dur="4s" repeatCount="indefinite"/></circle>
-                        <circle cx="80" cy="200" r="24" stroke="#7a1a1a" stroke-width="1" fill="none" opacity="0.3"><animate attributeName="r" values="24;30;24" dur="4s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.3;0.1;0.3" dur="4s" repeatCount="indefinite"/></circle>
                         <text x="80" y="170" text-anchor="middle" fill="#5a5a5a" font-size="10" font-family="Inter">INTERESTS</text>
-                        
                         <circle cx="80" cy="320" r="16" fill="#550000"><animate attributeName="r" values="16;18;16" dur="3.5s" repeatCount="indefinite"/></circle>
-                        <circle cx="80" cy="320" r="24" stroke="#7a1a1a" stroke-width="1" fill="none" opacity="0.3"><animate attributeName="r" values="24;30;24" dur="3.5s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.3;0.1;0.3" dur="3.5s" repeatCount="indefinite"/></circle>
                         <text x="80" y="355" text-anchor="middle" fill="#5a5a5a" font-size="10" font-family="Inter">SKILLS</text>
                     </g>
-                    
-                    <g>
-                        <circle cx="200" cy="100" r="12" fill="#7a1a1a"><animate attributeName="r" values="12;14;12" dur="2.5s" repeatCount="indefinite"/></circle>
-                        <circle cx="200" cy="200" r="12" fill="#7a1a1a"><animate attributeName="r" values="12;14;12" dur="3s" repeatCount="indefinite"/></circle>
-                        <circle cx="200" cy="300" r="12" fill="#7a1a1a"><animate attributeName="r" values="12;14;12" dur="3.5s" repeatCount="indefinite"/></circle>
-                    </g>
-                    
+                    <circle cx="200" cy="200" r="20" fill="#7a1a1a"><animate attributeName="r" values="20;24;20" dur="3s" repeatCount="indefinite"/></circle>
+                    <text x="200" y="170" text-anchor="middle" fill="#cc9999" font-size="11" font-family="Inter" font-weight="500">AI MATCH</text>
                     <g>
                         <circle cx="320" cy="150" r="20" fill="#550000"><animate attributeName="r" values="20;22;20" dur="3s" repeatCount="indefinite"/></circle>
-                        <circle cx="320" cy="150" r="28" stroke="#aa3333" stroke-width="1.5" fill="none" opacity="0.4"><animate attributeName="r" values="28;34;28" dur="3s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.4;0.1;0.4" dur="3s" repeatCount="indefinite"/></circle>
-                        <text x="320" y="115" text-anchor="middle" fill="#cc9999" font-size="11" font-family="Inter" font-weight="500">LAB MATCH</text>
-                        
+                        <text x="320" y="115" text-anchor="middle" fill="#cc9999" font-size="11" font-family="Inter" font-weight="500">LAB</text>
                         <circle cx="320" cy="250" r="20" fill="#550000"><animate attributeName="r" values="20;22;20" dur="4s" repeatCount="indefinite"/></circle>
-                        <circle cx="320" cy="250" r="28" stroke="#aa3333" stroke-width="1.5" fill="none" opacity="0.4"><animate attributeName="r" values="28;34;28" dur="4s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.4;0.1;0.4" dur="4s" repeatCount="indefinite"/></circle>
-                        <text x="320" y="290" text-anchor="middle" fill="#cc9999" font-size="11" font-family="Inter" font-weight="500">PI MATCH</text>
+                        <text x="320" y="290" text-anchor="middle" fill="#cc9999" font-size="11" font-family="Inter" font-weight="500">PI</text>
                     </g>
-                    
-                    <circle r="4" fill="#cc9999">
-                        <animateMotion dur="2s" repeatCount="indefinite" path="M80 200 Q140 150 200 200 Q260 200 320 150"/>
-                        <animate attributeName="opacity" values="0;1;1;0" dur="2s" repeatCount="indefinite"/>
-                    </circle>
-                    <circle r="4" fill="#cc9999">
-                        <animateMotion dur="2.5s" repeatCount="indefinite" begin="1s" path="M80 80 Q140 140 200 100 Q260 180 320 250"/>
-                        <animate attributeName="opacity" values="0;1;1;0" dur="2.5s" repeatCount="indefinite" begin="1s"/>
-                    </circle>
                 </svg>
             </div>
             
             <div class="network-content">
                 <h2>AI That <em>Understands</em> Research</h2>
-                <p>Our neural matching engine analyzes your academic profile, research interests, and career goals to find labs where you'll actually thrive—not just get coffee.</p>
+                <p>Our matching engine analyzes your academic profile, research interests, and career goals to find labs where you'll actually thrive—not just get coffee.</p>
                 
                 <div class="keyword-tags">
                     <span class="keyword-tag">Machine Learning</span>
-                    <span class="keyword-tag">NLP Analysis</span>
                     <span class="keyword-tag">Semantic Matching</span>
-                    <span class="keyword-tag">Career Prediction</span>
                     <span class="keyword-tag">Culture Fit</span>
                     <span class="keyword-tag">Mentorship Style</span>
                 </div>
@@ -706,40 +658,26 @@
                             <stop offset="100%" stop-color="#7a1a1a" stop-opacity="0.1"/>
                         </linearGradient>
                     </defs>
-                    
                     <path d="M120 30 Q200 80 120 130 Q40 180 120 230 Q200 280 120 330 Q40 380 120 400" stroke="url(#dnaGrad)" stroke-width="3" fill="none">
                         <animate attributeName="d" values="M120 30 Q200 80 120 130 Q40 180 120 230 Q200 280 120 330 Q40 380 120 400;M120 30 Q40 80 120 130 Q200 180 120 230 Q40 280 120 330 Q200 380 120 400;M120 30 Q200 80 120 130 Q40 180 120 230 Q200 280 120 330 Q40 380 120 400" dur="6s" repeatCount="indefinite"/>
                     </path>
-                    
                     <path d="M280 30 Q200 80 280 130 Q360 180 280 230 Q200 280 280 330 Q360 380 280 400" stroke="url(#dnaGrad)" stroke-width="3" fill="none">
                         <animate attributeName="d" values="M280 30 Q200 80 280 130 Q360 180 280 230 Q200 280 280 330 Q360 380 280 400;M280 30 Q360 80 280 130 Q200 180 280 230 Q360 280 280 330 Q200 380 280 400;M280 30 Q200 80 280 130 Q360 180 280 230 Q200 280 280 330 Q360 380 280 400" dur="6s" repeatCount="indefinite"/>
                     </path>
-                    
                     <g stroke="#550000" stroke-width="2">
                         <line x1="120" y1="80" x2="280" y2="80" opacity="0.5"><animate attributeName="opacity" values="0.3;0.7;0.3" dur="2s" repeatCount="indefinite"/></line>
-                        <line x1="120" y1="130" x2="280" y2="130" opacity="0.5"><animate attributeName="opacity" values="0.7;0.3;0.7" dur="2s" repeatCount="indefinite"/></line>
                         <line x1="120" y1="180" x2="280" y2="180" opacity="0.5"><animate attributeName="opacity" values="0.3;0.7;0.3" dur="2s" repeatCount="indefinite" begin="0.5s"/></line>
-                        <line x1="120" y1="230" x2="280" y2="230" opacity="0.5"><animate attributeName="opacity" values="0.7;0.3;0.7" dur="2s" repeatCount="indefinite" begin="0.5s"/></line>
                         <line x1="120" y1="280" x2="280" y2="280" opacity="0.5"><animate attributeName="opacity" values="0.3;0.7;0.3" dur="2s" repeatCount="indefinite" begin="1s"/></line>
-                        <line x1="120" y1="330" x2="280" y2="330" opacity="0.5"><animate attributeName="opacity" values="0.7;0.3;0.7" dur="2s" repeatCount="indefinite" begin="1s"/></line>
                     </g>
-                    
                     <text x="200" y="75" text-anchor="middle" fill="#5a5a5a" font-size="9" font-family="Inter">COMP SCI</text>
-                    <text x="200" y="125" text-anchor="middle" fill="#5a5a5a" font-size="9" font-family="Inter">ECONOMICS</text>
-                    <text x="200" y="175" text-anchor="middle" fill="#5a5a5a" font-size="9" font-family="Inter">HISTORY</text>
-                    <text x="200" y="225" text-anchor="middle" fill="#5a5a5a" font-size="9" font-family="Inter">PSYCHOLOGY</text>
-                    <text x="200" y="275" text-anchor="middle" fill="#5a5a5a" font-size="9" font-family="Inter">NEUROSCIENCE</text>
-                    <text x="200" y="325" text-anchor="middle" fill="#5a5a5a" font-size="9" font-family="Inter">LINGUISTICS</text>
-                    
-                    <circle cx="200" cy="80" r="5" fill="#aa3333"><animate attributeName="cy" values="80;75;80" dur="3s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.4;1;0.4" dur="3s" repeatCount="indefinite"/></circle>
-                    <circle cx="200" cy="180" r="4" fill="#7a1a1a"><animate attributeName="cy" values="180;185;180" dur="4s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.6;1;0.6" dur="4s" repeatCount="indefinite"/></circle>
-                    <circle cx="200" cy="280" r="6" fill="#aa3333"><animate attributeName="cy" values="280;275;280" dur="3.5s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.3;0.8;0.3" dur="3.5s" repeatCount="indefinite"/></circle>
+                    <text x="200" y="175" text-anchor="middle" fill="#5a5a5a" font-size="9" font-family="Inter">PSYCHOLOGY</text>
+                    <text x="200" y="275" text-anchor="middle" fill="#5a5a5a" font-size="9" font-family="Inter">ECONOMICS</text>
                 </svg>
             </div>
             
             <div class="research-content">
                 <h2>Research Across <em>Every Field</em></h2>
-                <p>From machine learning to medieval history, we connect students with research opportunities across the sciences, engineering, social sciences, and humanities at top institutions.</p>
+                <p>From machine learning to medieval history, we connect students with research opportunities across the sciences, engineering, social sciences, and humanities.</p>
                 
                 <div class="lab-stats">
                     <div class="lab-stat">
@@ -748,7 +686,7 @@
                     </div>
                     <div class="lab-stat">
                         <div class="lab-stat-number">150+</div>
-                        <div class="lab-stat-label">Research Fields Covered</div>
+                        <div class="lab-stat-label">Research Fields</div>
                     </div>
                     <div class="lab-stat">
                         <div class="lab-stat-number">ML</div>
@@ -793,13 +731,13 @@
     <footer>
         <div class="footer-left">© 2026 Scholr AI</div>
         <div class="footer-links">
-            <a href="/cdn-cgi/l/email-protection#2048454c4c4f605343484f4c520e4149">Contact</a>
+            <a href="mailto:contact@scholr.ai">Contact</a>
             <a href="#">Privacy</a>
             <a href="#">Terms</a>
         </div>
     </footer>
 
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    <script>
         document.querySelectorAll('.email-form').forEach(form => {
             form.addEventListener('submit', (e) => {
                 const email = form.querySelector('input').value;
@@ -819,16 +757,6 @@
         const style = document.createElement('style');
         style.textContent = `@keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-5px); } 75% { transform: translateX(5px); } }`;
         document.head.appendChild(style);
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, { threshold: 0.1 });
-
-        document.querySelectorAll('.stat-card, .network-content, .research-content, .keyword-tag, .lab-stat').forEach(el => {
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(20px)';
+    </script>
+</body>
+</html>
